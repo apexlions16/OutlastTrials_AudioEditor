@@ -37,6 +37,22 @@ jobs:
           architecture: "x64"
           cache: pip
 
+      - name: Python 3.11 kaynak uyumluluğunu düzelt
+        shell: pwsh
+        run: python tools/fix_python311_compat.py
+
+      - name: Kaynak düzeltmesini branch'e kaydet
+        if: github.event_name == 'push' && github.ref == 'refs/heads/agent/fix-windows-executable'
+        shell: pwsh
+        run: |
+          if (-not (git diff --quiet)) {
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add outlast_trials_audio_editor/ui/mixins/language_tabs.py
+            git commit -m "fix(py311): normalize incompatible f-string syntax"
+            git push origin HEAD:agent/fix-windows-executable
+          }
+
       - name: Bağımlılıkları kur
         shell: pwsh
         run: |
