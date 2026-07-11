@@ -236,11 +236,11 @@ class LanguageTabsMixin:
             "modified_date": QtWidgets.QLabel()
         }
 
-        modified_info_layout.addRow(f"{self.tr("duration")}", modified_info_labels["duration"])
-        modified_info_layout.addRow(f"{self.tr("size")}", modified_info_labels["size"])
-        modified_info_layout.addRow(f"{self.tr("sample_rate")}", modified_info_labels["sample_rate"])
-        modified_info_layout.addRow(f"{self.tr("bitrate")}", modified_info_labels["bitrate"])
-        modified_info_layout.addRow(f"{self.tr("channels")}", modified_info_labels["channels"])
+        modified_info_layout.addRow(self.tr("duration"), modified_info_labels["duration"])
+        modified_info_layout.addRow(self.tr("size"), modified_info_labels["size"])
+        modified_info_layout.addRow(self.tr("sample_rate"), modified_info_labels["sample_rate"])
+        modified_info_layout.addRow(self.tr("bitrate"), modified_info_labels["bitrate"])
+        modified_info_layout.addRow(self.tr("channels"), modified_info_labels["channels"])
         modified_info_layout.addRow(self.tr("bnk_size_label"), modified_info_labels["bnk_size"])
         modified_info_layout.addRow(self.tr("in_game_effects_label"), modified_info_labels["override_fx"]),
         modified_info_layout.addRow(self.tr("last_modified_label"), modified_info_labels["modified_date"])
