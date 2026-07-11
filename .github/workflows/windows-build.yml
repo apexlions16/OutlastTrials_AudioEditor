@@ -1,0 +1,171 @@
+name: Windows EXE Derlemesi
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - agent/fix-windows-executable
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: windows-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Kaynak kodu al
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Python 3.11 x64 kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          architecture: "x64"
+          cache: pip
+
+      - name: Python 3.11 kaynak uyumluluğunu düzelt
+        shell: pwsh
+        run: |
+          $path = "outlast_trials_audio_editor/ui/mixins/language_tabs.py"
+          $source = Get-Content $path -Raw
+          $keys = @("duration", "size", "sample_rate", "bitrate", "channels")
+          foreach ($key in $keys) {
+            $invalid = 'modified_info_layout.addRow(f"{self.tr("' + $key + '")}", modified_info_labels["' + $key + '"])'
+            $valid = 'modified_info_layout.addRow(self.tr("' + $key + '"), modified_info_labels["' + $key + '"])'
+            $source = $source.Replace($invalid, $valid)
+          }
+          [System.IO.File]::WriteAllText((Resolve-Path $path), $source, [System.Text.UTF8Encoding]::new($false))
+
+      - name: Kaynak düzeltmesini branch'e kaydet
+        if: github.event_name == 'push' && github.ref == 'refs/heads/agent/fix-windows-executable'
+        shell: pwsh
+        run: |
+          if (-not (git diff --quiet)) {
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add outlast_trials_audio_editor/ui/mixins/language_tabs.py
+            git commit -m "fix(py311): normalize incompatible f-string syntax"
+            git push origin HEAD:agent/fix-windows-executable
+          }
+
+      - name: Bağımlılıkları kur
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install `
+            pyinstaller==6.21.0 `
+            numpy==1.26.4 `
+            scipy==1.13.1 `
+            matplotlib==3.8.4 `
+            psutil==6.1.1 `
+            imageio-ffmpeg==0.6.0
+
+      - name: FFmpeg ikilisini doğrula
+        shell: pwsh
+        run: |
+          $ffmpeg = Join-Path $PWD "data/ffmpeg.exe"
+          $valid = (Test-Path $ffmpeg) -and ((Get-Item $ffmpeg).Length -gt 1000000)
+          if (-not $valid) {
+            $fallback = python -c "import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())"
+            Copy-Item $fallback $ffmpeg -Force
+          }
+          $bytes = [System.IO.File]::ReadAllBytes($ffmpeg)
+          if ($bytes.Length -lt 2 -or $bytes[0] -ne 0x4D -or $bytes[1] -ne 0x5A) {
+            throw "data/ffmpeg.exe geçerli bir Windows PE dosyası değil."
+          }
+
+      - name: Kaynak düzeni testleri
+        shell: pwsh
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m unittest tests.test_source_layout -v 2>&1 | Tee-Object -FilePath test-source-layout.log
+
+      - name: Çalışma zamanı API testleri
+        shell: pwsh
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m unittest tests.test_runtime_api -v 2>&1 | Tee-Object -FilePath test-runtime-api.log
+
+      - name: Wwise proje güvenliği testleri
+        shell: pwsh
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m unittest tests.test_wav_converter_project -v 2>&1 | Tee-Object -FilePath test-wav-converter.log
+
+      - name: Test günlüklerini yükle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-test-logs
+          path: test-*.log
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: PyInstaller ile gerçek Windows uygulamasını derle
+        shell: pwsh
+        env:
+          APP_VERSION: v1.2.1
+        run: python -m PyInstaller --noconfirm --clean OutlastTrialsAudioEditor.spec
+
+      - name: Derlenen EXE için açılış testi
+        shell: pwsh
+        run: |
+          $dist = Join-Path $PWD "dist/OutlastTrialsAudioEditor_v1.2.1_Windows_x64"
+          $exe = Join-Path $dist "OutlastTrials AudioEditor.exe"
+          if (-not (Test-Path $exe)) { throw "Derlenen EXE bulunamadı: $exe" }
+
+          $env:QT_QPA_PLATFORM = "offscreen"
+          $process = Start-Process -FilePath $exe -ArgumentList "--smoke-test" -WorkingDirectory $dist -Wait -PassThru
+          if ($process.ExitCode -ne 0) {
+            $log = Join-Path $dist "packaging_smoke_test.log"
+            if (Test-Path $log) { Get-Content $log }
+            $startupLog = Join-Path $dist "startup_crash.log"
+            if (Test-Path $startupLog) { Get-Content $startupLog }
+            throw "EXE açılış testi başarısız. Çıkış kodu: $($process.ExitCode)"
+          }
+
+          $smokeLog = Join-Path $dist "packaging_smoke_test.log"
+          if (-not (Test-Path $smokeLog)) { throw "Açılış testi sonuç dosyası oluşmadı." }
+          if ((Get-Content $smokeLog -Raw).Trim() -ne "OK") { throw "Açılış testi OK sonucu vermedi." }
+
+      - name: Dağıtım ZIP dosyasını oluştur
+        shell: pwsh
+        run: |
+          $name = "OutlastTrialsAudioEditor_v1.2.1_Windows_x64"
+          $source = Join-Path $PWD "dist/$name"
+          $zip = Join-Path $PWD "dist/$name.zip"
+          if (Test-Path $zip) { Remove-Item $zip -Force }
+          Compress-Archive -Path $source -DestinationPath $zip -CompressionLevel Optimal
+          Get-FileHash $zip -Algorithm SHA256 | Format-List
+
+      - name: Derleme artefaktını yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: OutlastTrialsAudioEditor-v1.2.1-Windows-x64
+          path: dist/OutlastTrialsAudioEditor_v1.2.1_Windows_x64.zip
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Etiketli derlemeyi GitHub Release olarak yayımla
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: OutlastTrials AudioEditor ${{ github.ref_name }}
+          body_path: RELEASE_NOTES_v1.2.1.md
+          files: dist/OutlastTrialsAudioEditor_v1.2.1_Windows_x64.zip
+          fail_on_unmatched_files: true

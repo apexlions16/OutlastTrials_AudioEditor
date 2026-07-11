@@ -55,7 +55,7 @@ if sys.platform == "win32":
 else:
     startupinfo = None
     CREATE_NO_WINDOW = 0
-current_version = "v1.2.0"
+current_version = "v1.2.1"
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
 APP_ROOT = Path(sys.executable).resolve().parent if getattr(sys, "frozen", False) else PACKAGE_ROOT.parent
