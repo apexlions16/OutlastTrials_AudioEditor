@@ -39,7 +39,16 @@ jobs:
 
       - name: Python 3.11 kaynak uyumluluğunu düzelt
         shell: pwsh
-        run: python tools/fix_python311_compat.py
+        run: |
+          $path = "outlast_trials_audio_editor/ui/mixins/language_tabs.py"
+          $source = Get-Content $path -Raw
+          $keys = @("duration", "size", "sample_rate", "bitrate", "channels")
+          foreach ($key in $keys) {
+            $invalid = 'modified_info_layout.addRow(f"{self.tr("' + $key + '")}", modified_info_labels["' + $key + '"])'
+            $valid = 'modified_info_layout.addRow(self.tr("' + $key + '"), modified_info_labels["' + $key + '"])'
+            $source = $source.Replace($invalid, $valid)
+          }
+          [System.IO.File]::WriteAllText((Resolve-Path $path), $source, [System.Text.UTF8Encoding]::new($false))
 
       - name: Kaynak düzeltmesini branch'e kaydet
         if: github.event_name == 'push' && github.ref == 'refs/heads/agent/fix-windows-executable'
