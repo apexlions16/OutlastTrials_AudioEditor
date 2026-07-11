@@ -64,11 +64,32 @@ jobs:
             throw "data/ffmpeg.exe geçerli bir Windows PE dosyası değil."
           }
 
-      - name: Python testlerini çalıştır
+      - name: Kaynak düzeni testleri
         shell: pwsh
         env:
           QT_QPA_PLATFORM: offscreen
-        run: python -m unittest discover -s tests -v
+        run: python -m unittest tests.test_source_layout -v 2>&1 | Tee-Object -FilePath test-source-layout.log
+
+      - name: Çalışma zamanı API testleri
+        shell: pwsh
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m unittest tests.test_runtime_api -v 2>&1 | Tee-Object -FilePath test-runtime-api.log
+
+      - name: Wwise proje güvenliği testleri
+        shell: pwsh
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m unittest tests.test_wav_converter_project -v 2>&1 | Tee-Object -FilePath test-wav-converter.log
+
+      - name: Test günlüklerini yükle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-test-logs
+          path: test-*.log
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: PyInstaller ile gerçek Windows uygulamasını derle
         shell: pwsh
