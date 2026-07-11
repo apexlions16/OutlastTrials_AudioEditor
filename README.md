@@ -1,214 +1,257 @@
-
 # 🎮 OutlastTrials AudioEditor
 
 <div align="center">
 
-**🔊 The Ultimate Audio & Subtitle Modding Suite for Outlast Trials 🔊**
+**🔊 The Outlast Trials için Kapsamlı Ses ve Altyazı Modlama Aracı 🔊**
 
-[![Version](https://img.shields.io/github/v/release/Bezna/OutlastTrials_AudioEditor?style=for-the-badge&logo=semantic-release&label=Version)](https://github.com/Bezna/OutlastTrials_AudioEditor/releases)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge&logo=opensourceinitiative)](LICENSE)
+[![Sürüm](https://img.shields.io/badge/sürüm-v1.2.0-success?style=for-the-badge&logo=semantic-release)](../../releases)
+[![Lisans](https://img.shields.io/badge/lisans-MIT-blue?style=for-the-badge&logo=opensourceinitiative)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8+-yellow?style=for-the-badge&logo=python)](https://www.python.org/)
-[![Platform](https://img.shields.io/badge/platform-Windows-lightblue?style=for-the-badge&logo=windows)](https://github.com/Bezna/OutlastTrials_AudioEditor/releases)
+[![Platform](https://img.shields.io/badge/platform-Windows-lightblue?style=for-the-badge&logo=windows)](../../releases)
 
-[![Downloads](https://img.shields.io/github/downloads/Bezna/OutlastTrials_AudioEditor/total?style=for-the-badge&logo=download&color=success)](https://github.com/Bezna/OutlastTrials_AudioEditor/releases)
-[![Stars](https://img.shields.io/github/stars/Bezna/OutlastTrials_AudioEditor?style=for-the-badge&logo=github&color=orange)](https://github.com/Bezna/OutlastTrials_AudioEditor)
+[![Katkıda Bulunanlar](https://img.shields.io/badge/katkıda_bulunanlar-hoş_geldiniz-orange?style=for-the-badge&logo=github)](../../graphs/contributors)
 [![Discord](https://img.shields.io/badge/Discord-Bezna-7289da?style=for-the-badge&logo=discord)](https://discord.com)
 
-[🚀 Quick Start](#-quick-start) • [✨ Features](#-features) • [📖 Full Guide](#-complete-usage-guide) • [💬 Support](#-support--contact)
+[🚀 Hızlı Başlangıç](#-hızlı-başlangıç) • [✨ Özellikler](#-özellikler) • [📖 Ayrıntılı Kullanım](#-ayrıntılı-kullanım-kılavuzu) • [💬 Destek](#-destek-ve-iletişim)
 
 </div>
 
 ---
 
-## 🌟 Overview
+## 🌟 Genel Bakış
 
 <div align="center">
-  <img src="https://i.imgur.com/RlDeIq0.png" alt="Application Screenshot" width="750" style="border-radius: 10px; box-shadow: 0 4px
-20px rgba(0,0,0,0.3);"/>
+  <img src="https://i.imgur.com/RlDeIq0.png" alt="Uygulama ekran görüntüsü" width="750" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);"/>
 </div>
 
 <br>
 
-**OutlastTrials AudioEditor** is the definitive modding suite for Outlast Trials enthusiasts. Whether you're a content creator, voice actor, translator, or just want to add your personal touch to the game, this tool provides a comprehensive, all-in-one solution to create professional-quality audio and subtitle modifications with ease.
+**OutlastTrials AudioEditor**, The Outlast Trials için geliştirilmiş kapsamlı bir modlama aracıdır. İçerik üreticileri, seslendirme sanatçıları, çevirmenler ve oyunu kişiselleştirmek isteyen oyuncular; ses ve altyazı değişikliklerini tek bir masaüstü uygulaması üzerinden hazırlayabilir, paketleyebilir ve oyuna dağıtabilir.
+
+Bu depo, uygulamanın özelliklerini korurken bakım ve katkı süreçlerini kolaylaştırmak amacıyla modüler bir Python paket yapısına geçirilmiştir. Eski başlatma komutu geriye dönük uyumluluk için çalışmaya devam eder.
 
 ---
 
-## ✨ Features
+## ✨ Özellikler
 
-### 🎵 **Advanced Audio Management**
+### 🎵 **Gelişmiş Ses Yönetimi**
 <details>
-<summary><b>🔧 Click to expand audio features</b></summary>
+<summary><b>🔧 Ses özelliklerini görüntülemek için tıklayın</b></summary>
 
-- **🎧 WEM File Support**: Native handling of Wwise audio files used in Outlast Trials.
-- **▶️ Real-time Playback**: Instantly play original or modded audio with the built-in player.
-- **⚡ Quick Load & Drag/Drop**: Replace audio files in seconds by dragging your `.wav`, `.mp3`, or `.ogg` files directly onto an entry.
-- **🔊 Volume Adjustment**: Precisely adjust the volume of single or multiple audio files with a visual editor.
-- **✂️ Audio Trimming**: Non-destructively trim the start and end of audio files with a visual waveform editor.
-- **🔄 Smart Conversion**: Advanced `Audio -> WEM` converter with two modes:
-  - **BNK Overwrite (Recommended)**: Converts at max quality and updates the bank file size, eliminating size constraints.
-  - **Adaptive Size Matching**: Intelligently adjusts quality to match original file sizes.
-- **📁 BNK Integrity Tools**: Verify and automatically fix size mismatches in `.bnK` files to prevent in-game audio issues.
+- **🎧 WEM Dosyası Desteği:** The Outlast Trials tarafından kullanılan Wwise ses dosyalarını doğrudan işler.
+- **▶️ Anlık Oynatma:** Yerleşik oynatıcıyla orijinal veya değiştirilmiş sesi anında dinleyebilirsiniz.
+- **⚡ Hızlı Yükleme ve Sürükle-Bırak:** `.wav`, `.mp3` veya `.ogg` dosyalarını doğrudan bir ses kaydının üzerine bırakarak saniyeler içinde değiştirebilirsiniz.
+- **🔊 Ses Seviyesi Ayarı:** Tek bir sesin veya birden fazla ses dosyasının seviyesini görsel düzenleyici üzerinden hassas biçimde ayarlayabilirsiniz.
+- **✂️ Ses Kırpma:** Görsel dalga biçimi düzenleyicisiyle seslerin başlangıç ve bitiş noktalarını tahribatsız olarak kırpabilirsiniz.
+- **🔄 Akıllı Dönüştürme:** İki çalışma moduna sahip gelişmiş `Ses -> WEM` dönüştürücüsü:
+  - **BNK Üzerine Yazma — Önerilen:** En yüksek kalitede dönüştürür ve bank dosyasındaki boyut bilgisini güncelleyerek boyut kısıtını ortadan kaldırır.
+  - **Uyarlanabilir Boyut Eşleştirme:** Dönüştürme kalitesini orijinal dosya boyutuna yaklaşacak şekilde otomatik ayarlar.
+- **📁 BNK Bütünlük Araçları:** Oyun içi ses sorunlarını önlemek için `.bnk` dosyalarındaki boyut uyuşmazlıklarını doğrular ve otomatik olarak düzeltebilir.
 </details>
 
-### 📝 **Professional Subtitle & Localization Tools**
+### 📝 **Profesyonel Altyazı ve Yerelleştirme Araçları**
 <details>
-<summary><b>🌍 Click to expand subtitle features</b></summary>
+<summary><b>🌍 Altyazı özelliklerini görüntülemek için tıklayın</b></summary>
 
-- **🌐 Multi-language Support**: Full support for all 14+ game languages.
-- **📄 Locres File Handling**: Native support for Unreal Engine localization files.
-- **✏️ Centralized Localization Editor**: Edit any subtitle from any file in one convenient, searchable table.
-- **📦 Batch Export**: Export all subtitle modifications into a clean, game-ready mod structure with one click.
+- **🌐 Çoklu Dil Desteği:** Oyundaki 14'ten fazla dil için kapsamlı destek sunar.
+- **📄 LOCRES Dosyası İşleme:** Unreal Engine yerelleştirme dosyalarını doğrudan işler.
+- **✏️ Merkezi Yerelleştirme Düzenleyicisi:** Farklı dosyalardaki altyazıları tek, aranabilir bir tablo üzerinden düzenlemenizi sağlar.
+- **📦 Toplu Dışa Aktarma:** Bütün altyazı değişikliklerini tek tıklamayla temiz ve oyun için hazır bir mod klasör yapısına aktarır.
 </details>
 
-### 🛠️ **Complete Modding Workflow**
+### 🛠️ **Eksiksiz Modlama İş Akışı**
 <details>
-<summary><b>⚙️ Click to expand modding tools</b></summary>
+<summary><b>⚙️ Modlama araçlarını görüntülemek için tıklayın</b></summary>
 
-- **🚀 One-Click Compile & Deploy**: Compile your mod and launch the game with a single press of `F5`.
-- **📁 Mod Profile Manager**: Create, manage, and switch between multiple mod projects effortlessly. Each profile is self-contained in its own folder.
-- **🔄 Resource Updater**: Keep your local audio and subtitle files up-to-date by extracting them directly from the latest game `.pak` archives.
+- **🚀 Tek Tıkla Derleme ve Dağıtım:** `F5` tuşuyla modunuzu derleyebilir, oyuna dağıtabilir ve oyunu başlatabilirsiniz.
+- **📁 Mod Profili Yöneticisi:** Birden fazla mod projesini oluşturabilir, yönetebilir ve aralarında kolayca geçiş yapabilirsiniz. Her profil kendi klasöründe bağımsız olarak saklanır.
+- **🔄 Kaynak Güncelleyici:** Yerel ses ve altyazı kaynaklarını oyunun güncel `.pak` arşivlerinden yeniden çıkararak güncel tutabilirsiniz.
 </details>
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Hızlı Başlangıç
 
-### ⚡ **Option 1: Instant Setup (Recommended)**
+### ⚡ **Seçenek 1: Hazır Sürümü Kullanma — Önerilen**
 
 <div align="center">
 
-[![Download Latest](https://img.shields.io/badge/📥_Download_Latest_Release-success?style=for-the-badge&logo=download)](https://github.com/Bezna/OutlastTrials_AudioEditor/releases)
+[![En Güncel Sürümü İndir](https://img.shields.io/badge/📥_En_Güncel_Sürümü_İndir-success?style=for-the-badge&logo=download)](../../releases/latest)
 
 </div>
 
-1.  📥 Download the latest release `.zip` file.
-2.  📂 Extract it to a folder on your computer.
-3.  ▶️ Run `OutlastTrials AudioEditor.exe`.
-4.  🛠️ **First Run**: The app will prompt you to run the **Resource Updater**. Point it to your game's `.pak` file (`.../The Outlast Trials/OPP/Content/Paks/OPP-WindowsClient.pak`) to extract the necessary game audio and text.
-5.  🎉 Start modding!
+1. 📥 En güncel sürümün `.zip` dosyasını indirin.
+2. 📂 Arşivi bilgisayarınızdaki bir klasöre çıkarın.
+3. ▶️ `OutlastTrials AudioEditor.exe` dosyasını çalıştırın.
+4. 🛠️ **İlk Çalıştırma:** Uygulama sizden **Kaynak Güncelleyici** aracını çalıştırmanızı isteyecektir. Gerekli oyun seslerini ve metinlerini çıkarmak için oyunun `.pak` dosyasını seçin:
+   `.../The Outlast Trials/OPP/Content/Paks/OPP-WindowsClient.pak`
+5. 🎉 Modlamaya başlayın.
 
-### 🔧 **Option 2: Developer Setup**
+> **Not:** Bu depodaki v1.2.0 yeniden yapılandırma sürümü kaynak kod ve geliştirme paketi olarak hazırlanmıştır. Windows `.exe` paketi yayımlanmamışsa uygulamayı aşağıdaki geliştirici kurulumu ile çalıştırabilirsiniz.
+
+### 🔧 **Seçenek 2: Kaynak Koddan Geliştirici Kurulumu**
 
 <details>
-<summary><b>🛠️ Advanced installation from source</b></summary>
+<summary><b>🛠️ Gelişmiş kurulum adımlarını görüntülemek için tıklayın</b></summary>
 
 ```bash
-# 📋 Clone the repository
-git clone https://github.com/Bezna/OutlastTrials_AudioEditor.git
+# 📋 Depoyu klonlayın
+git clone <REPO_ADRESİNİZ>
 cd OutlastTrials_AudioEditor
 
-# 🐍 Install Python dependencies
+# 📦 Git LFS ile izlenen büyük dosyaları indirin
+git lfs install
+git lfs pull
+
+# 🐍 Python bağımlılıklarını kurun
 pip install -r requirements.txt
 
-# ▶️ Launch the application
+# ▶️ Uygulamayı başlatın
 python OutlastTrialsAudioEditor.py
 ```
 </details>
 
-### 📋 **System Requirements**
+### 📋 **Sistem Gereksinimleri**
 
-| Component          | Requirement                                                                                             |
-| ------------------ | ------------------------------------------------------------------------------------------------------- |
-| **Operating System** | Windows 10/11 (64-bit)                                                                                  |
-| **Game Version**   | Outlast Trials (Steam / Epic Games)                                                                     |
-| **Audio Engine**   | [Wwise 2019.1.6.7110](https://www.audiokinetic.com/download/) (Needed for audio conversion) |
+| Bileşen | Gereksinim |
+| --- | --- |
+| **İşletim Sistemi** | Windows 10/11 — 64 bit |
+| **Oyun Sürümü** | The Outlast Trials — Steam veya Epic Games |
+| **Ses Motoru** | [Wwise 2019.1.6.7110](https://www.audiokinetic.com/download/) — ses dönüşümü için gereklidir |
+| **Kaynak Koddan Çalıştırma** | Python 3.8 veya daha yeni bir sürüm ve Git LFS |
 
 ---
 
-## 📚 Complete Usage Guide
-**Official Tutorial Video (OLD):** https://www.youtube.com/watch?v=HDV8ocAPtzo
+## 📚 Ayrıntılı Kullanım Kılavuzu
 
-### 🎵 **Audio Modding Workflow**
+**Resmî eğitim videosu — eski sürüm:** https://www.youtube.com/watch?v=HDV8ocAPtzo
 
-The easiest way to replace audio is with **Quick Load**.
+### 🎵 **Ses Modlama İş Akışı**
+
+Bir sesi değiştirmenin en kolay yolu **Hızlı Yükleme** özelliğini kullanmaktır.
 
 <div align="center">
-<img src="https://i.imgur.com/your-quick-load-gif.gif" alt="Quick Load Demo" width="600"/>
+<img src="https://i.imgur.com/your-quick-load-gif.gif" alt="Hızlı Yükleme gösterimi" width="600"/>
 </div>
 
-1.  **Find Audio**: Browse or search for the audio file you want to replace in the main list.
-2.  **Quick Load**:
-    *   **Right-click** on the file and select `🎵 Quick Load Custom Audio...`.
-    *   **OR**, simply **drag and drop** your new audio file (`.mp3`, `.wav`, `.ogg`, etc.) directly onto the entry in the list.
-3.  **Done!**: The editor will automatically convert and place your new audio into the active mod profile.
+1. **Sesi Bulun:** Ana listede değiştirmek istediğiniz ses dosyasına göz atın veya arama alanını kullanın.
+2. **Hızlı Yükleme:**
+   - Dosyaya **sağ tıklayın** ve `🎵 Özel Sesi Hızlı Yükle...` seçeneğini seçin.
+   - Alternatif olarak yeni ses dosyanızı (`.mp3`, `.wav`, `.ogg` ve benzeri) doğrudan listedeki kaydın üzerine **sürükleyip bırakın**.
+3. **Tamamlandı:** Düzenleyici yeni sesi otomatik olarak dönüştürür ve etkin mod profiline yerleştirir.
 
-### 📝 **Subtitle Editing Workflow**
+### 📝 **Altyazı Düzenleme İş Akışı**
 
-1.  **Select Language**: Go to `Settings` and choose your target subtitle language.
-2.  **Open Editor**: Navigate to the **Localization Editor** tab.
-3.  **Find & Edit**: Use the search bar to find the text you want to change. Double-click the "Current" column to edit.
-4.  **Save**: Click `💾 Save All Changes` at the bottom.
+1. **Dili Seçin:** `Ayarlar` bölümünden hedef altyazı dilini seçin.
+2. **Düzenleyiciyi Açın:** **Yerelleştirme Düzenleyicisi** sekmesine geçin.
+3. **Metni Bulun ve Düzenleyin:** Değiştirmek istediğiniz metni arama alanıyla bulun. Düzenlemek için “Geçerli” sütununa çift tıklayın.
+4. **Kaydedin:** Alt bölümdeki `💾 Tüm Değişiklikleri Kaydet` düğmesine basın.
 
-### 🚀 **Compiling and Deploying Your Mod**
+### 🚀 **Modu Derleme ve Oyuna Dağıtma**
 
-1.  **Compile**: Once you've made your changes, go to `Tools -> Compile Mod`. This will package all your modified files into a single game-ready `.pak` file.
-2.  **Deploy & Run**: The easiest way to test is to press `F5` (or go to `Tools -> Deploy Mod & Run Game`). This automatically copies your `.pak` file into the game's `Paks` directory and launches Outlast Trials.
-
+1. **Derleyin:** Değişikliklerinizi tamamladıktan sonra `Araçlar -> Modu Derle` seçeneğini kullanın. Uygulama değiştirilmiş dosyaları oyun için hazır tek bir `.pak` dosyasında paketler.
+2. **Dağıtın ve Çalıştırın:** En kolay test yöntemi `F5` tuşuna basmaktır. Alternatif olarak `Araçlar -> Modu Dağıt ve Oyunu Çalıştır` seçeneğini kullanabilirsiniz. Bu işlem `.pak` dosyasını oyunun `Paks` klasörüne kopyalar ve The Outlast Trials'ı başlatır.
 
 ---
 
-## 🤝 Contributing & Community
+## 🧑‍💻 Geliştirme Mimarisi
+
+Uygulama kaynak kodu `outlast_trials_audio_editor/` Python paketi altında modüler olarak düzenlenmiştir. Tarihsel `OutlastTrialsAudioEditor.py` dosyası geriye dönük uyumlu, küçük bir başlatıcı olarak korunmuştur. Böylece mevcut çalıştırma komutları ve paketleme giriş noktaları çalışmaya devam eder.
+
+Başlıca katmanlar:
+
+- `common.py`: ortak bağımlılıklar, platform bayrakları, sürüm ve uygulama kök dizini.
+- `i18n/`: yerleşik çeviri verileri.
+- `models.py`: hafif veri modelleri.
+- `debug.py`: loglama, hata ayıklama penceresi ve genel hata yakalama mekanizması.
+- `services/`: BNK, WEM, ses, yerelleştirme ve ayar iş mantığı.
+- `workers.py`: arka planda çalışan Qt iş parçacıkları.
+- `profiles.py`: profil yönetimi ve mod içe aktarma akışı.
+- `ui/`: yeniden kullanılabilir bileşenler, diyaloglar ve ana pencere.
+- `ui/mixins/`: eski büyük ana pencere sınıfından ayrılan işlevsel modüller.
+- `app.py`: uygulama başlangıcı ve açılış ekranı akışı.
+
+Ayrıntılı modül haritası ve yeniden yapılandırma kuralları için [ARCHITECTURE.md](ARCHITECTURE.md) dosyasına bakın.
+
+Regresyon testlerini çalıştırmak için:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+---
+
+## 🤝 Katkıda Bulunma ve Topluluk
 
 <div align="center">
 
-[![Contributors](https://img.shields.io/badge/👥_Join_Contributors-orange?style=for-the-badge)](https://github.com/Bezna/OutlastTrials_AudioEditor/graphs/contributors)
-[![Issues](https://img.shields.io/github/issues/Bezna/OutlastTrials_AudioEditor?style=for-the-badge&logo=github)](https://github.com/Bezna/OutlastTrials_AudioEditor/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/Bezna/OutlastTrials_AudioEditor?style=for-the-badge&logo=github)](https://github.com/Bezna/OutlastTrials_AudioEditor/pulls)
+[![Katkıda Bulunanlar](https://img.shields.io/badge/👥_Katkıda_Bulunun-orange?style=for-the-badge)](../../graphs/contributors)
+[![Hatalar](https://img.shields.io/badge/🐛_Hata_Bildir-red?style=for-the-badge&logo=github)](../../issues)
+[![Değişiklik İsteği](https://img.shields.io/badge/🔀_Değişiklik_İsteği_Aç-blue?style=for-the-badge&logo=github)](../../pulls)
 
 <br>
 
-| 🐛 Bug Reports | 💡 Feature Ideas | 📖 Documentation | 💻 Code |
+| 🐛 Hata Bildirimi | 💡 Özellik Önerisi | 📖 Dokümantasyon | 💻 Kod |
 | :---: | :---: | :---: | :---: |
-| Found an issue?<br>[**Report it here**](https://github.com/Bezna/OutlastTrials_AudioEditor/issues) | Have a suggestion?<br>[**Share your idea**](https://github.com/Bezna/OutlastTrials_AudioEditor/issues) | Improve guides<br>**Submit a PR** | Fix bugs or add features<br>**Fork and contribute** |
+| Bir sorun mu buldunuz?<br>[**Buradan bildirin**](../../issues) | Bir öneriniz mi var?<br>[**Fikrinizi paylaşın**](../../issues) | Kılavuzları geliştirin<br>**Değişiklik isteği gönderin** | Hataları düzeltin veya özellik ekleyin<br>**Depoyu çatallayıp katkıda bulunun** |
 
 </div>
 
+Katkı hazırlarken mümkün olduğunca şu ilkeleri uygulayın:
+
+- Kullanıcı davranışını ve mevcut dosya formatı uyumluluğunu koruyun.
+- Yeni iş mantığını uygun `services/`, `workers/` veya `ui/` modülüne ekleyin.
+- Ana başlatıcı dosyayı yeniden büyütmeyin.
+- Davranış değişiklikleri için test ekleyin.
+- Windows dosya yolları, boşluk içeren klasör adları ve Unicode dosya adlarını göz önünde bulundurun.
+
 ---
 
-## 💬 Support & Contact
+## 💬 Destek ve İletişim
 
 <div align="center">
 
-### **🆘 Need Help? We're Here for You!**
+### **🆘 Yardıma mı ihtiyacınız var?**
 
-💬 Discord Support | 🐛 Bug Reports
+| 💬 Discord Desteği | 🐛 Hata Bildirimi |
 | :---: | :---: |
-| <img src="https://img.shields.io/badge/Discord-Bezna-7289da?style=for-the-badge&logo=discord" alt="Discord Badge"/><br>**Discord: Bezna** | <a href="https://github.com/Bezna/OutlastTrials_AudioEditor/issues"><img src="https://img.shields.io/badge/GitHub-Issues-red?style=for-the-badge&logo=github" alt="GitHub Issues"/></a><br><i>Technical issues & bugs</i> |
+| <img src="https://img.shields.io/badge/Discord-Bezna-7289da?style=for-the-badge&logo=discord" alt="Discord rozeti"/><br>**Discord: Bezna** | <a href="../../issues"><img src="https://img.shields.io/badge/GitHub-Hatalar-red?style=for-the-badge&logo=github" alt="GitHub hata bildirimleri"/></a><br><i>Teknik sorunlar ve hatalar</i> |
 
 </div>
 
-**When reporting issues, please include:** A detailed description, steps to reproduce, the debug log (`Ctrl+D`), and any relevant files or screenshots.
+Bir hata bildirirken şunları ekleyin: ayrıntılı sorun açıklaması, hatayı yeniden oluşturma adımları, hata ayıklama günlüğü (`Ctrl+D`) ve ilgili dosya veya ekran görüntüleri.
 
 ---
 
-## 🙏 Acknowledgments
+## 🙏 Teşekkürler
 
-Special thanks to the tools and communities that made this project possible:
+Bu projenin geliştirilmesini mümkün kılan araçlara ve topluluklara teşekkür ederiz:
 
-- **Red Barrels** - For creating the amazing Outlast Trials game
-- **vgmstream Team** - For excellent audio conversion tools
-- **UnrealLocres Contributors** - For localization file handling
-- **repak by hypermetric** - For PAK file creation (BIG THANKS!)
-- **Audiokinetic** - For the Wwise audio engine
-- **PyQt5 Team** - For the GUI framework
-- **FFmpeg Team** - For universal audio conversion
+- **Red Barrels:** The Outlast Trials oyununu geliştirdikleri için.
+- **vgmstream Ekibi:** Ses dönüştürme araçları için.
+- **UnrealLocres Katkıcıları:** Yerelleştirme dosyası işleme desteği için.
+- **hypermetric tarafından geliştirilen repak:** PAK dosyası oluşturma desteği için — büyük teşekkürler.
+- **Audiokinetic:** Wwise ses motoru için.
+- **PyQt5 Ekibi:** Grafik kullanıcı arayüzü çatısı için.
+- **FFmpeg Ekibi:** Evrensel ses dönüştürme desteği için.
+- **Bezna:** Orijinal OutlastTrials AudioEditor projesini geliştirdiği için.
 
-## 💰 Support the Project
+## 💰 Projeyi Destekleyin
 
-If this tool has been useful to you, please consider supporting its development!
+Bu araç işinize yaradıysa geliştirme sürecini destekleyebilirsiniz:
 
-- [**Support via DonationAlerts**](https://www.donationalerts.com/r/bezna_)
-- ⭐ Star this repository on GitHub
-- 📢 Share with other modders
+- [**DonationAlerts üzerinden destek olun**](https://www.donationalerts.com/r/bezna_)
+- ⭐ GitHub deposuna yıldız verin.
+- 📢 Aracı diğer mod geliştiricileriyle paylaşın.
 
 ---
 
 <div align="center">
-  
-  **Made with ❤️ for the Outlast Trials modding community**
-  
-  *Happy Modding!* 🎮
-  
-  [⬆ Back to Top](#-outlasttrials-audioeditor)
-  
+
+**The Outlast Trials modlama topluluğu için ❤️ ile geliştirildi.**
+
+*İyi modlamalar!* 🎮
+
+[⬆ Başa Dön](#-outlasttrials-audioeditor)
+
 </div>
