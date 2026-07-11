@@ -3,3 +3,5 @@
 icon.ico
 build.bat
 config.json
+startup_crash.log
+packaging_smoke_test.log
